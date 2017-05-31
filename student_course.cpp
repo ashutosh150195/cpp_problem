@@ -4,8 +4,10 @@
  *  Created on: 31-May-2017
  *      Author: think-twice-code-once
  */
+
 #include<iostream>
 #include <cstring>
+#include <climits>
 
 using namespace std;
 
@@ -167,24 +169,47 @@ void add_result(){
 	++s_c_index;
 }
 
-void minimum_score(){
+int minimum_score(int *score){
+	int minimum = INT_MAX;
+	int index = 0 ;
+	for(index = 0; index != '\0'; index++){
+		if(minimum > score[index]){
+			minimum = score[index];
+		}
+	}
 
+	return minimum;
 }
 
-void maximum_score(){
+int maximum_score(int *score){
 
+	int maximum = INT_MIN;
+	int index = 0 ;
+	for(index = 0; index != '\0'; index++){
+		if(maximum < score[index]){
+			maximum = score[index];
+		}
+	}
+
+	return maximum;
 }
 
-void iterate_course(){
+void iterate_course(char *c_code){
 
-	maximum_score();
-	minimum_score();
+	student_course s_c[30];
+	int score[30];
+	int max_score = 0, min_score = 0;
+
+	max_score = maximum_score(score);
+	min_score = minimum_score(score);
 }
 
-void iterate_student(){
+void iterate_student(char *s_id){
 
-	maximum_score();
-	minimum_score();
+	student_course s_c[30];
+	int score[30];
+	maximum_score(score);
+	minimum_score(score);
 }
 
 void view_result(){
@@ -211,7 +236,7 @@ void view_result(){
 					} while (!c_status);
 
 			cout<<"Results for course: "<<c_code;
-			iterate_course();
+			iterate_course(c_code);
 
 		}if((select =='S' || select == 's')){
 			do {
@@ -225,7 +250,7 @@ void view_result(){
 				} while (!s_status);
 
 			cout<<"Results for student: "<<s_id;
-			iterate_student();
+			iterate_student(s_id);
 		}
 
 	} while ((select == 'C' || select == 'c')||(select =='S' || select == 's'));
