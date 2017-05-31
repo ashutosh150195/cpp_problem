@@ -21,24 +21,32 @@ class student_course{
 	char course_name[40] ;
 	int marks ;
 
+	void set_student_course(char *s_id , char *c_code , int mark){
+		strcpy(course_code,c_code);
+		strcpy(student_id, s_id);
+		marks = mark;
+	}
+
 };
 
 class course : public student_course{
 	public:
-		course(char *c_code , char *c_name){
+		void set_course(char *c_code , char *c_name){
 			strcpy(course_code,c_code);
 			strcpy(course_name , c_name);
 		}
+
+		bool find_c_id(char *c_id){
+					bool status ;
+
+					return status;
+				}
 };
 
 class student : public student_course{
 	public:
 
-		student(){
-
-		}
-
-		student(char *s_id , char *s_name){
+		void set_student(char *s_id , char *s_name){
 			strcpy(student_id , s_id);
 			strcpy(student_name , s_name);
 		}
@@ -49,16 +57,11 @@ class student : public student_course{
 			return status;
 		}
 
-		bool find_c_id(char *c_id){
-					bool status ;
-
-					return status;
-				}
 };
 
 void add_course(){
 	//cout<<"add a course"<<endl;
-	course *c;
+	course c[100];
 	char c_code[30], c_name[30];
 	char select ;
 
@@ -68,7 +71,7 @@ void add_course(){
 	cin>>c_name;
 
 
-	c[c_index] = new course(c_code , c_name);
+	c[c_index].set_course(c_code,c_name);
 	++c_index;
 
 	cout<<"Would you like to [A]dd a new course or [R]eturn to the previous menu?";
@@ -92,7 +95,7 @@ void add_student(){
 		cout<<"Please enter student name:";
 		cin>>s_name;
 
-		s[s_index] = new student(s_id , s_name);
+		s[s_index].set_student(s_id , s_name);
 		++s_index;
 
 		cout<<"Would you like to [A]dd a new student or [R]eturn to the previous menu?";
@@ -111,6 +114,7 @@ void add_result(){
 	char c_code[30];
 	bool s_status = true , c_status = true;
 	student s ;
+	course c ;
 	student_course s_c[30];
 	int marks;
 
@@ -127,14 +131,24 @@ void add_result(){
 	do {
 		cout<<"Please enter course code:"<<endl;
 		cin>>c_code;
-		c_status = s.find_c_id(c_code);
+		c_status = c.find_c_id(c_code);
 		if(!c_status){
 				cout<<"Course does not exist."<<endl;
 			}
 		} while (!c_status);
 
-	cout<<"Please enter final score:"<<endl;
 
+	do {
+		cout<<"Please enter final score:"<<endl;
+		cin>>marks;
+
+		if(!(marks >= 0 && marks <= 100)){
+			cout<<"Score is not between 0.0 and 100.0 inclusive."<<endl;
+		}
+	} while (!(marks >= 0 && marks <= 100));
+
+	s_c[s_c_index].set_student_course(s_id, c_code, marks);
+	++s_c_index;
 }
 
 void view_result(){
