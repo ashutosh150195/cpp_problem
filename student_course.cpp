@@ -30,20 +30,30 @@ class student_course{
 };
 
 class course : public student_course{
+
+	course course[30];
 	public:
 		void set_course(char *c_code , char *c_name){
 			strcpy(course_code,c_code);
 			strcpy(course_name , c_name);
 		}
 
-		bool find_c_id(char *c_id){
-					bool status ;
-
+		bool find_c_id(char *c_code){
+					bool status = false;
+					int index = 0;
+					for(index = 0 ; index <= c_index; index++){
+						if(strcmp(course[index].course_code, c_code) == 0){
+							status = true;
+							break;
+						}
+					}
 					return status;
 				}
 };
 
 class student : public student_course{
+
+	student student[30];
 	public:
 
 		void set_student(char *s_id , char *s_name){
@@ -52,8 +62,14 @@ class student : public student_course{
 		}
 
 		bool find_s_id(char *s_id){
-			bool status ;
-
+			bool status = false;
+			int index = 0;
+			for(index = 0 ; index <= c_index; index++){
+				if(strcmp(student[index].student_id, s_id) == 0){
+					status = true;
+					break;
+				}
+			}
 			return status;
 		}
 
