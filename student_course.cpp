@@ -151,8 +151,69 @@ void add_result(){
 	++s_c_index;
 }
 
+void minimum_score(){
+
+}
+
+void maximum_score(){
+
+}
+
+void iterate_course(){
+
+	maximum_score();
+	minimum_score();
+}
+
+void iterate_student(){
+
+	maximum_score();
+	minimum_score();
+}
+
 void view_result(){
-	cout<<"view result"<<endl;
+	//cout<<"view result"<<endl;
+
+	char select ;
+	char c_code[30] , s_id[30];
+	bool c_status = true , s_status = true;
+	course c;
+	student s;
+
+	do {
+		cout<<"Would you like to view [C]ourse results, [S]tudent results or [R]eturn?"<<endl;
+		cin>>select;
+
+		if((select == 'C' || select == 'c')){
+			do {
+					cout<<"Please enter course code:"<<endl;
+					cin>>c_code;
+					c_status = c.find_c_id(c_code);
+					if(!c_status){
+							cout<<"Course does not exist."<<endl;
+						}
+					} while (!c_status);
+
+			cout<<"Results for course: "<<c_code;
+			iterate_course();
+
+		}if((select =='S' || select == 's')){
+			do {
+					cout<<"Please enter student id:"<<endl;
+					cin>>s_id;
+					s_status = s.find_s_id(s_id);
+
+					if(!s_status){
+						cout<<"Student does not exist."<<endl;
+					}
+				} while (!s_status);
+
+			cout<<"Results for student: "<<s_id;
+			iterate_student();
+		}
+
+	} while ((select == 'C' || select == 'c')||(select =='S' || select == 's'));
+
 }
 
 void message(){
